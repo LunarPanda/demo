@@ -4,6 +4,9 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven {
+            url "https://maven.lib.umd.edu/maven2/"
+        }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -25,18 +28,28 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+            url "https://maven.lib.umd.edu/maven2/"
+    }
 }
 
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-cloud-connectors')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('junit:junit:4.12')
+	compile("com.fasterxml.jackson.core:jackson-databind")
+	runtime('com.microsoft.sqlserver:sqljdbc4:4.0')
+	runtime('com.h2database:h2')
 }
 
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR1"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR2"
 	}
 }

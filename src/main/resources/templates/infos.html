@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Demo</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+  	 	<h2 th:text="${appId}"></h2>
+		<table>
+       		<h2>Cloud Information</h2>
+
+       		<tbody>
+       			<tr th:each="prop:${cloudInfos}">
+       				<td th:text="${prop.key}">state</td> 
+       				<td th:text="${prop.value}">name</td>
+       			</tr>
+       		</tbody>
+		</table>     
+       		
+
+  </body>
+</html>

@@ -1,8 +1,10 @@
 package com.example.config;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.example.web.WebConfig;
+
 
 public class DemoWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
   
