@@ -79,7 +79,7 @@ public class JdbcDigitImageRepository implements DigitImagesRepository {
 	
 	@Override
 	public DigitImage getADigitImage(int id) {
-		LobHandler lobHandler = new DefaultLobHandler();
+		final LobHandler lobHandler = new DefaultLobHandler();
 		DigitImage dImage = jdbcOperations.queryForObject(
 				SELECT_STATEMENT,
 				new RowMapper<DigitImage>(){
