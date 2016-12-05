@@ -45,7 +45,7 @@ public class DigitImage {
 	public void writeToOutputStream(OutputStream os){
 		BufferedImage image = new BufferedImage(28,28,BufferedImage.TYPE_BYTE_GRAY);
 		for (int i=0;i<28*28;++i){
-			int d=Byte.toUnsignedInt(data[i]);
+			int d=data[i]&255;
 			image.setRGB(i%28,i/28,d*65536+d*256+d);
 		}
 		try {

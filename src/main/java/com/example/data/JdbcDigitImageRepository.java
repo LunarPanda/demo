@@ -31,7 +31,7 @@ public class JdbcDigitImageRepository implements DigitImagesRepository {
 		try{
 			// Lob: large Object
 			// see http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html#jdbc-lob
-			LobHandler lobHandler = new DefaultLobHandler();
+			final LobHandler lobHandler = new DefaultLobHandler();
 			jdbcOperations.update(INSERT_STATEMENT,
 					new Object[]{
 							dImage.id,
@@ -53,7 +53,7 @@ public class JdbcDigitImageRepository implements DigitImagesRepository {
 	@Override
 	public List<DigitImage> fetchDigitImages(int num) {
 		List<DigitImage> list=new LinkedList<DigitImage>();
-		LobHandler lobHandler = new DefaultLobHandler();
+		final LobHandler lobHandler = new DefaultLobHandler();
 		// this part may be modified later: now I'm still testing, so I try the simplest sql command
 		for (int i=0;i<num;++i){
 			// use jdbcTemplate to fetch image one by one
