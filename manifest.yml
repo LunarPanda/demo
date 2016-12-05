@@ -6,4 +6,4 @@ applications:
   host: demo
   path: build/libs/demo-0.0.1-SNAPSHOT.war
   env:
-    SPRING_PROFILES_DEFAULT: cloud
+    SPRING_PROFILES_ACTIVE: cloud

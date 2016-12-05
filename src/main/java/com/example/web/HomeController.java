@@ -136,7 +136,10 @@ public class HomeController {
 	List<String> servicesIds=new LinkedList<String>();
 	for (ServiceInfo serviceInfo: serviceInfos){
 		servicesIds.add(serviceInfo.getId());
+		System.out.println("NAME:"+serviceInfo.getId());
 	}
+	
+	System.out.println(servicesIds.size());
 	
 	model.addAttribute("services",servicesIds);
 	

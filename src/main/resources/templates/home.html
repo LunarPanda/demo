@@ -5,12 +5,12 @@
   </head>
   <body>
   
-  	   	<h1>Demo</h1>
+  	   	<h2>AppId</h2>
   	   	
-  	 	<h2 th:text="${appId}"></h2>
+  	 	<h1 th:text="${appId}"></h1>
 		<h2>Services</h2>
 		<ul>
-   			<li th:each="srevice:${services}" th:text="${sevice}">service</li>
+   			<li th:each="service:${services}" th:text="${service}">service</li>
 		</ul>
   	   	
        	<table>

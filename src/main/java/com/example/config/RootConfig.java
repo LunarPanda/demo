@@ -4,7 +4,9 @@ import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.Cloud;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -30,16 +32,19 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class RootConfig {
 	// we put database configuration here
 	// as mentioned in the notes, beans here will be shared across the whole application
+	
+	@Autowired
+	Cloud cloud;
+	
+	@Profile("local")
 	@Bean
 	public DataSource embeddedDatabase(){
 		return new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)
 				.addScript("classpath:data/test_schema.sql")
 				//.addScript("classpath:test_data.sql")
-				.build();
-			
+				.build();	
 	}
-	
 	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {// why can't be put in WebConfig, it associates with component scan 
