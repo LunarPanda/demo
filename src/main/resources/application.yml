@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: ${vcap.application.name:demo}
+  profiles:
+    active: local
+
+eureka:
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}  
+---
+spring:
+  profiles: cloud
+ 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server.40.112.214.155.xip.io/eureka/ 
+---
+spring:
+  profiles: local
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      
+server:
+  port: 8080

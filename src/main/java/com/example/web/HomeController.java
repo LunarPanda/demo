@@ -5,9 +5,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +20,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.service.ServiceInfo;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,6 +68,9 @@ public class HomeController {
   
   @Autowired 
   Cloud cloud;
+  
+  @Autowired
+  Environment env;
   
   @Autowired
   MicroservicesManager microservicesManager;
@@ -155,6 +161,15 @@ public class HomeController {
 	  System.out.println(request.content);
 	  String current=this.microservicesManager.getCurrentMicroservice();
 	  String targetUrl=this.microservicesManager.getMicroservices().get(current).URI;
+	  String [] profiles=env.getActiveProfiles();
+	  for (String profile:profiles){
+		  if (profile.equals("cloud")){//strip port
+			  int index=targetUrl.lastIndexOf(":");
+			  targetUrl=targetUrl.substring(0, index);
+			  break;
+		  }
+	  }
+	  
 	  URI uri = UriComponentsBuilder
 	  			.fromHttpUrl(String.format("%s/chat",targetUrl))
 				.queryParam("request", request.content).build().toUri();
