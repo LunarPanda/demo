@@ -18,8 +18,6 @@ public class ConversationRepository {
 	@Autowired
 	JdbcOperations jdbcOperations;
 	
-	AtomicInteger counter=new AtomicInteger();
-	
 	static final int MAX_LEN=256;
 	
 	public ConversationRepository(){
@@ -31,12 +29,11 @@ public class ConversationRepository {
 	}
 	
 	public void addConversation(Conversation conversation){
-		int id=counter.incrementAndGet();
 		String request=conversation.request;
 		if (request.length()>256){
 			request=request.substring(0, 255);
 		}
-		jdbcOperations.update(INSERT_STATEMENT,id,request,conversation.reply);
+		jdbcOperations.update(INSERT_STATEMENT,request,conversation.reply);
 		System.out.println("add a new conversation");
 	}
 	
@@ -46,7 +43,6 @@ public class ConversationRepository {
 
 					@Override
 					public Conversation mapRow(ResultSet rs, int rowNum) throws SQLException {
-						//int id = rs.getInt("id");
 						String request =rs.getString("request");
 						String reply = rs.getString("reply");
 						return new Conversation(request,reply);
@@ -56,8 +52,8 @@ public class ConversationRepository {
 		return list;
 	}
 	
-	final String INSERT_STATEMENT="INSERT INTO conversations (id, request, reply) VALUES (?, ?, ?);";
+	final String INSERT_STATEMENT="INSERT INTO conversations (request, reply) VALUES (?, ?);";
 	final String SELECT_STATEMENT="SELECT * FROM conversations;";
 	final String DROP_STATEMENT="drop table if exists conversations;";
-	final String CREATE_STATEMENT=String.format("create table conversations (id int primary key, request nvarchar(%d), reply nvarchar(%d));",MAX_LEN,MAX_LEN);
+	final String CREATE_STATEMENT=String.format("create table conversations (request nvarchar(%d), reply nvarchar(%d));",MAX_LEN,MAX_LEN);
 }
