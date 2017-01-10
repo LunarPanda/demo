@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @ServiceScan
 @EnableDiscoveryClient
-@EnableCircuitBreaker
-@EnableHystrixDashboard
+//@EnableCircuitBreaker
+//@EnableHystrixDashboard
 public class CloudConfig extends AbstractCloudConfig {
     @Bean("myCloud")
     public Cloud getCloud() {

@@ -1,9 +1,12 @@
 ---
 applications:
 - name: demo
-  memory: 512M
+  memory: 768M
   instances: 1
   host: demo
   path: build/libs/demo-0.0.1-SNAPSHOT.war
+  services:
+   - mysqldb
+   - myrediscache
   env:
     SPRING_PROFILES_ACTIVE: cloud
